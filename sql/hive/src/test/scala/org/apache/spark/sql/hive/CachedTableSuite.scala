@@ -63,6 +63,13 @@ class CachedTableSuite extends QueryTest {
     checkAnswer(
       sql("SELECT * FROM src"),
       preCacheResults)
+    
+    assertCached(sql("SELECT * FROM src s1"))
+
+    checkAnswer(
+      sql("SELECT * FROM src s1"),
+      preCacheResults)      
+      
 
     uncacheTable("src")
     assertCached(sql("SELECT * FROM src"), 0)
